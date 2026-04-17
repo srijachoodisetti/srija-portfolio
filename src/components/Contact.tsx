@@ -24,10 +24,18 @@ export default function Contact() {
     if (!formRef.current) return;
     setStatus("sending");
     try {
-      await emailjs.sendForm(
+      const formData = new FormData(formRef.current);
+      const templateParams = {
+        name: formData.get("name"),
+        from_email: formData.get("from_email"),
+        message: formData.get("message"),
+        title: "New message from portfolio",
+        time: new Date().toLocaleString(),
+      };
+      await emailjs.send(
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
-        formRef.current,
+        templateParams,
         { publicKey: EMAILJS_PUBLIC_KEY }
       );
       setStatus("sent");
