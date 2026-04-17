@@ -24,10 +24,18 @@ export default function Contact() {
     if (!formRef.current) return;
     setStatus("sending");
     try {
-      await emailjs.sendForm(
+      const formData = new FormData(formRef.current);
+      const templateParams = {
+        name: formData.get("name"),
+        from_email: formData.get("from_email"),
+        message: formData.get("message"),
+        title: "New message from portfolio",
+        time: new Date().toLocaleString(),
+      };
+      await emailjs.send(
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
-        formRef.current,
+        templateParams,
         { publicKey: EMAILJS_PUBLIC_KEY }
       );
       setStatus("sent");
@@ -80,7 +88,7 @@ export default function Contact() {
         >
           <div>
             <label className="text-xs uppercase tracking-wider text-muted-foreground">Name</label>
-            <input name="from_name" required className="mt-1 w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-accent transition" placeholder="Your name" />
+            <input name="name" required className="mt-1 w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-accent transition" placeholder="Your name" />
           </div>
           <div>
             <label className="text-xs uppercase tracking-wider text-muted-foreground">Email</label>
