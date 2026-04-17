@@ -88,7 +88,7 @@ export default function Contact() {
         >
           <div>
             <label className="text-xs uppercase tracking-wider text-muted-foreground">Name</label>
-            <input name="from_name" required className="mt-1 w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-accent transition" placeholder="Your name" />
+            <input name="name" required className="mt-1 w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-accent transition" placeholder="Your name" />
           </div>
           <div>
             <label className="text-xs uppercase tracking-wider text-muted-foreground">Email</label>
